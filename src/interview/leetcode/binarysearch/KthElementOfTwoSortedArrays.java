@@ -1,36 +1,24 @@
 package interview.leetcode.binarysearch;
 
-public class MedianofTwoSortedArrays {
+
+public class KthElementOfTwoSortedArrays {
 
 	/**
 	 * There are two sorted arrays A and B of size m and n respectively. Find
-	 * the median of the two sorted arrays. The overall run time complexity
+	 * the Kth of the two sorted arrays. The overall run time complexity
 	 * should be O(log (m+n)).
 	 * 
 	 */
 	public static void main(String[] args) {
 
-		MedianofTwoSortedArrays m = new MedianofTwoSortedArrays();
+		MedianofTwoSortedArraysDiffSize m = new MedianofTwoSortedArraysDiffSize();
 		System.out.println(m.findMedianSortedArrays(
 				new int[] { 1, 3, 8, 9, 10 }, new int[] { 2, 4, 5, 6, 7 }));
 	}
 
-	public double findMedianSortedArrays(int A[], int B[]) {
-		int m = A.length;
-		int n = B.length;
-		int total = m + n;
-
-		if (total % 2 != 0) // odd
-			return (double) findKth(A, B, total / 2, 0, m - 1, 0, n - 1);
-		else { // even
-			return (findKth(A, B, total / 2, 0, m - 1, 0, n - 1) + findKth(A,
-					B, total / 2 - 1, 0, m - 1, 0, n - 1)) * 0.5;
-		}
-	}
-
 	// k is start from 0
 	// this is one of the more general questions
-	public static int findKth(int A[], int B[], int k, int aStart, int aEnd,
+	public int findKth(int A[], int B[], int k, int aStart, int aEnd,
 			int bStart, int bEnd) {
 
 		int aLen = aEnd - aStart + 1;

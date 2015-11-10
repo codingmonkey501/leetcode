@@ -20,25 +20,11 @@ public class RemoveDuplicatesfromSortedArray {
 		new RemoveDuplicatesfromSortedArray().removeDuplicates(new int[]{1,1,2,2});
 	}
 	
-	public int removeDuplicates3(int[] A) {
-        //1,1,1,3,3,4
-        //1,1,2
-        if(A.length==0) return 0;
-        
-        int j=1;
-        for (int i=1; i<A.length;i++){
-            A[j] = A[i];
-            if(A[j] != A[j-1]){
-                j++;
-            }
-        }
-        return j;
-    }
-
-	
 	// concise way
 	public int removeDuplicates(int[] A) {
 
+		if (A == null)
+			return 0;
 		if (A.length == 0)
 			return 0;
 		if (A.length == 1)
@@ -48,30 +34,7 @@ public class RemoveDuplicatesfromSortedArray {
 			if (A[index] != A[i])
 				A[++index] = A[i]; // ++index
 		}
-		return index+1;
-	}
-
-	public int removeDuplicates2(int[] A) {
-
-		if (A == null)
-			return 0;
-		int prev = -1;
-		int next = 0;
-		while (next < A.length) {
-			if (prev == -1 || A[next] != A[prev]) {
-				prev++;
-				if (prev < next)
-					A[prev] = A[next];
-			}
-			next += 1;
-		}
-		return prev + 1;
-
-		// null
-		// 1
-		// 1,1
-		// 1,1,2
-		// 1,1,2,2
+		return index + 1;
 	}
 
 

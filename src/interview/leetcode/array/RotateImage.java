@@ -17,13 +17,13 @@ public class RotateImage {
 	}
 	
 	
-	public void rotate3(int[][] matrix) {
+	public void rotate(int[][] matrix) {
         
 		//m must be same as n
         int m = matrix.length;
         int n = matrix[0].length;
         
-        //swap along the mai diagonal
+        //swap along the main diagonal
         for(int i=0; i<m; i++){
             for(int j=i; j<n; j++){
                 swap(matrix, i, j, j, i);
@@ -38,31 +38,8 @@ public class RotateImage {
         }
     }
 	
-	// easier understand and concise code
-	public void rotate(int[][] matrix) {
-
-		int n = matrix.length;
-		
-		//swap along the counter-diagonal
-		for (int i = 0; i < n; ++i)
-			for (int j = 0; j < n - i; ++j) {
-				swap(matrix, i, j, n - 1 - j, n - 1 - i);
-			}
-
-		//swap along the horizontal line
-		for (int i = 0; i < n / 2; ++i)
-			for (int j = 0; j < n; ++j) {
-				swap(matrix, i, j, n - 1 - i, j);
-			}
-	}
 	
-	
-	public void swap(int[][] matrix, int i, int j, int k, int l){
-        int t = matrix[i][j];
-        matrix[i][j] = matrix[k][l];
-        matrix[k][l] = t;
-    }
-
+	//rotate from outside to inner
 	public void rotate2(int[][] matrix) {
 
 		if (matrix == null || matrix.length == 0 || matrix[0].length == 0 || matrix.length == 1)
@@ -87,27 +64,9 @@ public class RotateImage {
 		}
 	}
 
-	// this is not in place
-	public void rotate1(int[][] matrix) {
-
-		if (matrix == null || matrix.length == 0)
-			return;
-
-		int m = matrix.length;
-
-		int[][] result = new int[m][m];
-
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < m; j++) {
-				result[j][m - 1 - i] = matrix[i][j];
-			}
-		}
-
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < m; j++) {
-				matrix[i][j] = result[i][j];
-			}
-		}
-
-	}
+	public void swap(int[][] matrix, int i, int j, int k, int l){
+        int t = matrix[i][j];
+        matrix[i][j] = matrix[k][l];
+        matrix[k][l] = t;
+    }
 }

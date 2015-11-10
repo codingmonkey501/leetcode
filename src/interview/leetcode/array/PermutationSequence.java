@@ -27,7 +27,21 @@ public class PermutationSequence {
 		System.out.println(p.getPermutation(4, 2));
 	}
 
-	// ? hard
+	// solution 2
+	public String getPermutation2(int n, int k) {
+
+		int[] num = new int[n];
+		for (int i = 0; i < n; ++i)
+			num[i] = i + 1;
+		for (int i = 0; i < k - 1; ++i)
+			new NextPermutation().nextPermutation(num);
+		String result = "";
+		for (int i = 0; i < n; i++)
+			// convert array to string
+			result += num[i];
+		return result;
+	}
+
 	public String getPermutation(int n, int k) {
 
 		// initialize all numbers
@@ -62,67 +76,5 @@ public class PermutationSequence {
 		}
 
 		return result;
-	}
-
-	// solution 2
-	public String getPermutation2(int n, int k) {
-
-		int[] num = new int[n];
-		for (int i = 0; i < n; ++i)
-			num[i] = i + 1;
-		for (int i = 0; i < k - 1; ++i)
-			nextPermutation(num);
-		String result = "";
-		for (int i = 0; i < n; i++)
-			// convert array to string
-			result += num[i];
-		return result;
-	}
-
-	public void nextPermutation(int[] num) {
-
-		if (num.length == 1)
-			return;
-
-		// Get a reversed range to simplify reversed traversal.
-		int last = num.length - 1;
-		int pivot = last - 1;
-		while (pivot != -1 && num[pivot] >= num[pivot + 1])
-			pivot--;
-
-		if (pivot == -1) {
-			reverse(num, 0, num.length - 1);
-			return;
-		}
-
-		int change = last;
-		while (pivot != change) {
-			if (num[change] > num[pivot])
-				break;
-			change--;
-		}
-
-		swap(num, change, pivot);
-
-		reverse(num, pivot + 1, num.length - 1);
-
-	}
-
-	// how to reverse array
-	private void reverse(int[] num, int first, int last) {
-
-		int len = last - first + 1;
-		for (int i = 0; i < len / 2; i++) {
-			int tmp = num[first + i];
-			num[first + i] = num[last - i];
-			num[last - i] = tmp;
-		}
-	}
-
-	private void swap(int[] num, int a, int b) {
-
-		int tmp = num[a];
-		num[a] = num[b];
-		num[b] = tmp;
 	}
 }

@@ -21,21 +21,18 @@ public class SingleNumber {
 
 	public int singleNumber1(int[] A) {
 
-		int mask = 0x0001;
-		int num = 0;
+		int res = 0;
 		for (int j = 0; j < 32; j++) {
-			int one = 0; // wrong here: scope is important when reset
+			int countOnes = 0;
 			for (int i = 0; i < A.length; i++) {
-				int bit = A[i] & mask;
-				if (bit != 0)
-					one++; // wrong here : check the bit not 0
+				if ((A[j] & 0x01 << i) == 0x01 << i)
+					countOnes++;
 			}
-			if (one % 2 != 0)
-				num = num | (1 << j);
-			mask = (mask << 1);
+			if (countOnes % 2 != 0)
+				res = res | (1 << j);
 
 		}
-		return num;
+		return res;
 	}
 
 	public static void main(String[] args) {

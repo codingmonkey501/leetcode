@@ -29,47 +29,50 @@ public class CombinationSum {
 	}
 
 	
-	
+	/**
+	 * Solution 1
+	 */
 	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        
-        Arrays.sort(candidates);
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
-        List<Integer> path = new ArrayList<Integer>();
-        combinationSum(candidates, target, 0, 0, list, path);
-        
-        return list;
-    }
-    
-    public void combinationSum(int[] candidates, int target, int start, int sum, List<List<Integer>> list, List<Integer> path){
-        
-        if(sum > target){
-            return;
-        }else if( sum == target){
-            list.add(new ArrayList<Integer>(path));
-            return;
-        }
-        
-        for(int i=start; i<candidates.length; i++){ 
-            sum += candidates[i];
-            path.add(candidates[i]);
-            combinationSum(candidates, target, i, sum, list, path);
-            sum -= candidates[i];
-            path.remove(path.size()-1);
-        }
-    }
 
-    
-    
+		Arrays.sort(candidates);
+		List<List<Integer>> list = new ArrayList<List<Integer>>();
+		List<Integer> path = new ArrayList<Integer>();
+		combinationSum2(candidates, target, 0, 0, list, path);
+
+		return list;
+	}
+
+	public void combinationSum2(int[] candidates, int target, int start, int sum, List<List<Integer>> list, List<Integer> path) {
+
+		if (sum > target) {
+			return;
+		} else if (sum == target) {
+			list.add(new ArrayList<Integer>(path));
+			return;
+		}
+
+		for (int i = start; i < candidates.length; i++) {
+			sum += candidates[i];
+			path.add(candidates[i]);
+			combinationSum2(candidates, target, i, sum, list, path);
+			sum -= candidates[i];
+			path.remove(path.size() - 1);
+		}
+	}
+
+	/**
+	 * Solution 2
+	 */
 	public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
 
 		Arrays.sort(candidates);
 		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> intermediate = new ArrayList<Integer>();
-		dfs(candidates, target, 0, intermediate, result);
+		combinationSum(candidates, target, 0, intermediate, result);
 		return result;
 	}
 
-	private void dfs(int[] candidates, int gap, int start, ArrayList<Integer> intermediate, ArrayList<ArrayList<Integer>> result) {
+	private void combinationSum(int[] candidates, int gap, int start, ArrayList<Integer> intermediate, ArrayList<ArrayList<Integer>> result) {
 
 		if (gap == 0) {
 			ArrayList<Integer> r = new ArrayList<Integer>(intermediate);
@@ -80,7 +83,7 @@ public class CombinationSum {
 			if (gap < candidates[i])
 				return;
 			intermediate.add(candidates[i]);
-			dfs(candidates, gap - candidates[i], i, intermediate, result);
+			combinationSum(candidates, gap - candidates[i], i, intermediate, result);
 			intermediate.remove(intermediate.size() - 1);
 		}
 	}
